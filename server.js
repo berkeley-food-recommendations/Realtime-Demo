@@ -22,16 +22,18 @@ app.get('/callbacks/geo/:geoName', function(request, response){
 });
 
 app.post('/callbacks/geo/:geoName', function(request, response){
+  console.log("processing a geo callback!");
   helpers.debug("PUT /callbacks/geo/" + request.params.geoName);
    // The POST callback for Instagram to call every time there's an update
    // to one of our subscriptions.
     
    // First, let's verify the payload's integrity
-   if(!helpers.isValidRequest(request)) {
+   console.log("the request is " + request);
+   /*if(!helpers.isValidRequest(request)) {
      response.send('FAIL');
      return;
    }
-    
+    */
     // Go through and process each update. Note that every update doesn't
     // include the updated data - we use the data in the update to query
     // the Instagram API to get the data we want.

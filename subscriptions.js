@@ -8,17 +8,24 @@ var redis = require('redis'),
     subscriptionPattern = 'channel:*',
     socket = io.listen(app);
 
+var fs = require('fs');
+
 // We use Redis's pattern subscribe command to listen for signals
 // notifying us of new updates.
 
 var redisClient = redis.createClient(settings.REDIS_PORT, settings.REDIS_HOST);
+
 
 var pubSubClient = redis.createClient(settings.REDIS_PORT, settings.REDIS_HOST);
 pubSubClient.psubscribe(subscriptionPattern);
 
 pubSubClient.on('pmessage', function(pattern, channel, message){
   helpers.debug("Handling pmessage: " + message);
-
+  fs.writeFile("logs/Instagram.txt", message, function(err) {
+      if (err) {
+          console.log(err);
+      }
+  });
   /* Every time we receive a message, we check to see if it matches
      the subscription pattern. If it does, then go ahead and parse it. */
 

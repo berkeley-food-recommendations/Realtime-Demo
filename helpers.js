@@ -2,6 +2,7 @@ var redis = require('redis');
 var settings = require('./settings');
 var crypto = require('crypto');
 
+
 var redisClient = redis.createClient(settings.REDIS_PORT, settings.REDIS_HOST);
 
 function isValidRequest(request) {
@@ -80,7 +81,7 @@ function processGeography(geoName, update){
         
         // Let all the redis listeners know that we've got new media.
         redisClient.publish('channel:' + geoName, data);
-        debug("Published: " + data);
+
       });
     });
   });
@@ -88,11 +89,16 @@ function processGeography(geoName, update){
 exports.processGeography = processGeography;
 
 function getMedia(callback){
+    console.log("HELLO WHAT THE HELL");
     // This function gets the most recent media stored in redis
-  redisClient.lrange('media:objects', 0, 14, function(error, media){
+    redisClient.lrange('media:objects', 0, 14, function(error, media){
       debug("getMedia: got " + media.length + " items");
+      console.log("error? :" + error);
+
       // Parse each media JSON to send to callback
-      media = media.map(function(json){return JSON.parse(json);});
+      media = media.map(function(json){
+          console.log("Got back: " + json);
+          return JSON.parse(json);});
       callback(error, media);
   });
 }

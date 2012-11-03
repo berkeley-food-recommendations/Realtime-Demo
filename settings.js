@@ -5,13 +5,13 @@ var app = express.createServer();
 exports.app = app;
 
 exports.appPort = process.env.IG_APP_PORT || 3000;
-exports.CLIENT_ID = process.env.IG_CLIENT_ID || 'CLIENT_ID'
-exports.CLIENT_SECRET = process.env.IG_CLIENT_SECRET || 'CLIENT_SECRET';
+exports.CLIENT_ID = process.env.IG_CLIENT_ID || '51e2858f16aa4db4935b1486718085d7'
+exports.CLIENT_SECRET = process.env.IG_CLIENT_SECRET || 'c83eb4b4448344b7b70eb7975b4d59f1';
 exports.httpClient = (process.env.IG_USE_INSECURE ? require('http') : require('https'));
 exports.apiHost = process.env.IG_API_HOST || 'api.instagram.com';
 exports.apiPort = process.env.IG_API_PORT || null;
 exports.basePath = process.env.IG_BASE_PATH || '';
-exports.REDIS_PORT = 6486;
+exports.REDIS_PORT = 4314;
 exports.REDIS_HOST = '127.0.0.1';
 exports.debug = true;
 
