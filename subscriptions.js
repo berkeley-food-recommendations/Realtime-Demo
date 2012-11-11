@@ -21,7 +21,7 @@ pubSubClient.psubscribe(subscriptionPattern);
 
 pubSubClient.on('pmessage', function(pattern, channel, message){
   helpers.debug("Handling pmessage: " + message);
-  fs.writeFile("/var/log/instagram/Instagram.txt", message, function(err) {
+  fs.appendFile("/var/log/instagram/Instagram.txt", message, function(err) {
       if (err) {
           console.log(err);
       }
