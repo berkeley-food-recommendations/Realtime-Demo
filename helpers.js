@@ -96,9 +96,7 @@ function getMedia(callback){
       console.log("error? :" + error);
 
       // Parse each media JSON to send to callback
-      media = media.map(function(json){
-          console.log("Got back: " + json);
-          return JSON.parse(json);});
+      media = media.map(function(json){return JSON.parse(json);});
       callback(error, media);
   });
 }
